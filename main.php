@@ -1,6 +1,6 @@
 <?php
     $bd_user = 'root';
-    $bd_password = '';
+    $bd_password = 'root';
     $bd_name = '3_bagrova_m';
     
     if (!isset($_POST['name']) || !isset($_POST['lastName']) || 
