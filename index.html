@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
     <head>
-	<link rel="stylesheet" type="text/css" href="super.css" /> <!-- подключаем css -->
+	<link rel="stylesheet" type="text/css" href="super.css"/> <!-- подключаем css -->
     <meta charset = "utf8" />
+	<script type="text/javascript" src="jquery-3.5.1.js"></script> <!-- подключаем jquery -->
     <title>ЛР №5-8</title>
     </head>
     <body>
@@ -31,7 +32,20 @@
 				
 				<input type="checkbox" id="chb">
 				<label for="chb">Согласен на обработку данных</label>
-				
+				<script>
+					function checkParams() 
+					{
+						var name = $('#name').val();
+						var email = $('#email').val();
+						var phone = $('#phone').val();
+						
+						if(name.length != 0 && email.length != 0 && phone.length != 0) {
+							$('#submit').removeAttr('disabled');
+						} else {
+							$('#submit').attr('disabled', 'disabled');
+						}
+					}
+				</script>
 				<input type="submit" value="Зарегистрироваться">
 			</div>
 		</form>
