@@ -89,6 +89,12 @@ body {
    font-weight: 500;
    font-size: 24px;
    color: #707981;
+   text-align: center;
 }
-
- 
+.form-inner input[type="checkbox"]{
+   display: inline-block;
+   width: 10%;
+}
+.form-inner label{
+   color: #707981;
+}
