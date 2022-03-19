@@ -80,6 +80,21 @@ body {
    color: white;
    font-size: 14px;
 }
+
+/*не работает*/
+/*.btn-sub:hover {
+   background-color: #4CAF50; 
+   color: white;
+}*/
+/*.form-inner input[type=submit]:hover {
+   background: #275F8B;
+}
+.form-inner input[disabled] {
+   opacity: .6;
+   cursor: not-allowed;
+}*/
+
+
 .form-inner textarea {
    resize: none;
 }
@@ -91,10 +106,10 @@ body {
    color: #707981;
    text-align: center;
 }
-.form-inner input[type="checkbox"]{
+.form-inner input[type="checkbox"] {
    display: inline-block;
    width: 10%;
 }
-.form-inner label{
+.form-inner label {
    color: #707981;
 }
