@@ -32,7 +32,7 @@
 				<input type="password" placeholder="Пароль" name="password" id="regPassword" onkeyup="checkParams()" required>
 				<input type="password" placeholder="Повторите пароль" name="repeatPassword" id="regRepeatPassword" onkeyup="checkParams()" required>
 				
-				<input type="checkbox" id="chb" onchange="checkParams()"> <!--"document.getElementById('regSubmit').disabled = !this.checked;-->
+				<input type="checkbox" id="chb" onchange="checkParams()"> <!--"document.getElementById('regSubmit').disabled = !this.checked;"-->
 				<label for="chb">Согласен на обработку данных</label>
 				<script>
 					function checkParams() 
@@ -41,15 +41,13 @@
 						var email = $('#regEmail').val();
 						var password = $('#regPassword').val();
 						var repeatPassword = $('#regRepeatPassword').val();
-						//document.getElementById('regSubmit').disabled = !this.checked;//отключает кнопку регистрации, если чекбокс не отмечен
 
-						/*if(document.getElementById('chb') == checked)
-						{
-							var lookForCheck = 1;
-							alert('1');
-						}*/
+						var chbAgreement = document.getElementById('chb');
+						var btnRegistration = document.getElementById('regSubmit');
+						//document.getElementById('regSubmit').disabled = !document.getElementById('chb').checked;//отключает кнопку регистрации, если чекбокс не отмечен
 
-						if(login.length != 0 && email.length != 0 && password.length != 0 && repeatPassword.length !=0)// && lookForCheck == 1
+						if(login.length != 0 && email.length != 0 && password.length != 0 && repeatPassword.length !=0 &&
+						(btnRegistration.disabled = chbAgreement.checked))
 						{
 							$('#regSubmit').removeAttr('disabled');
 						} 
