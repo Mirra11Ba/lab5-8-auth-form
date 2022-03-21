@@ -2,6 +2,7 @@
     $db_user = 'root';
     $db_password = 'root';
     $db_name = '3_bagrova';
+    global $link;
 
     //подключения к серверу базы данных в PHP 
         $link = new mysqli('localhost', $db_user, $db_password, $db_name);
