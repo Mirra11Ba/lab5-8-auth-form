@@ -133,10 +133,6 @@ body {
    text-decoration: none;
    text-align: center;
 }
-/* .a-puple-button:hover {
-   background-color: #4CAF50; 
-   color: white;
-} */
 .a-puple-button:hover {
    background: #FFFBAD;
    border-bottom: 4px solid #FFF86B;

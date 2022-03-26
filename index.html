@@ -21,46 +21,5 @@
 				<a href="registrationForm.html" class="a-puple-button">Регистрация</a>
 			</div>
 		</form>
-
-
-		<!--Регистрация-->
-		<form class="decor" method="post" action="reg.php" id="registration">
-			<div class="form-left-decoration"></div>
-			<div class="form-right-decoration"></div>
-			<div class="circle"></div>
-			<div class="form-inner">
-				<h3>Регистрация</h3>
-				<input type="text" placeholder="Логин" name="login" id="regLogin" onkeyup="checkParams()" required>
-				<input type="email" placeholder="E-mail" name="email" id="regEmail" onkeyup="checkParams()" required>
-				<input type="password" placeholder="Пароль" name="password" id="regPassword" onkeyup="checkParams()" required>
-				<input type="password" placeholder="Повторите пароль" name="repeatPassword" id="regRepeatPassword" onkeyup="checkParams()" required>
-				
-				<input type="checkbox" id="chb" onchange="checkParams()"> <!--"document.getElementById('regSubmit').disabled = !this.checked;"-->
-				<label for="chb">Согласен на обработку данных</label>
-				<script>
-					//скрипт для проверки поля на пустоту + нажат ли чекбокс
-					function checkParams() 
-					{
-						var login = $('#regLogin').val();//val() - функция для получение значения эл-та login в форме регистрации
-						var email = $('#regEmail').val();
-						var password = $('#regPassword').val();
-						var repeatPassword = $('#regRepeatPassword').val();
-
-						var chbAgreement = document.getElementById('chb');
-						var btnRegistration = document.getElementById('regSubmit');
-						//document.getElementById('regSubmit').disabled = !document.getElementById('chb').checked;//отключает кнопку регистрации, если чекбокс не отмечен
-
-						if(login.length != 0 && email.length != 0 && password.length != 0 && repeatPassword.length !=0 &&
-						(btnRegistration.disabled = chbAgreement.checked))
-						{
-							$('#regSubmit').removeAttr('disabled');
-						} 
-						else 
-						{
-							$('#regSubmit').attr('disabled', 'disabled');
-						}
-					}
-				</script>
-				<input type="submit" value="Зарегистрироваться" id="regSubmit" disabled> 
 	</body>
 </html>

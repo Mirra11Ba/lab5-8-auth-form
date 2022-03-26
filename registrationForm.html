@@ -25,6 +25,7 @@
 					//скрипт для проверки поля на пустоту + нажат ли чекбокс
 					function checkParams() 
 					{
+						//обращение по id элемента
 						var login = $('#regLogin').val();//val() - функция для получение значения эл-та login в форме регистрации
 						var email = $('#regEmail').val();
 						var password = $('#regPassword').val();
@@ -32,17 +33,46 @@
 
 						var chbAgreement = document.getElementById('chb');
 						var btnRegistration = document.getElementById('regSubmit');
-						//document.getElementById('regSubmit').disabled = !document.getElementById('chb').checked;//отключает кнопку регистрации, если чекбокс не отмечен
+							//document.getElementById('regSubmit').disabled = !document.getElementById('chb').checked;//отключает кнопку регистрации, если чекбокс не отмечен
 
-						if(login.length != 0 && email.length != 0 && password.length != 0 && repeatPassword.length !=0 &&
-						(btnRegistration.disabled = chbAgreement.checked))
+						if (password == repeatPassword)
 						{
-							$('#regSubmit').removeAttr('disabled');
-						} 
-						else 
-						{
-							$('#regSubmit').attr('disabled', 'disabled');
+							if(login.length != 0 && email.length != 0 && password.length != 0 && repeatPassword.length !=0 &&
+							(btnRegistration.disabled = chbAgreement.checked))
+							{
+								$('#regSubmit').removeAttr('disabled');
+							} 
+							else 
+							{
+								$('#regSubmit').attr('disabled', 'disabled');
+							}
 						}
+						else
+						{
+							$("#regRepeatPassword'").css('border', 'red 1px solid');
+							$('regRepeatPassword').html('Пароли не совпадают');
+						}
+
+
+				
+						/*$(document).ready(function() 
+						{
+							$('#repPass').change(function() 
+							{
+								var pass = $("#pass").val();
+								var pass_rep = $("#repPass").val();
+
+								if (pass != pass_rep) 
+								{
+									$("#repPass").css('border', 'red 1px solid');
+									$('#errorBlock').html('Пароли не совпадают');
+								}
+							});
+						});*/
+					
+
+
+						
 					}
 				</script>
 				<input type="submit" value="Зарегистрироваться" id="regSubmit" disabled> 
