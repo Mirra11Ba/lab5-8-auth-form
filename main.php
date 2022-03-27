@@ -35,14 +35,15 @@
         $result = mysqli_query ($link, $query);
         if ($result) 
         {
-            echo "<html>
-                    <head></head>
-                    <body>
-                    <h4>Ваша инфа добавлена в базу данных.</h4>
-                    <p>Ваш логин: $login </p><br>
-                    <p>Ваша пароль: $password </p><br>
-                    <p>Ваш E-mail: $email </p><br>
-                    </body>";
+            echo "
+                <html>
+                <head></head>
+                <body>
+                <h4>Ваша инфа добавлена в базу данных.</h4>
+                <p>Ваш логин: $login </p><br>
+                <p>Ваша пароль: $password </p><br>
+                <p>Ваш E-mail: $email </p><br>
+                </body>";
 
                     /*
                      {

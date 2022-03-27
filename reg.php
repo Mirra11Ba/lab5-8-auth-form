@@ -31,23 +31,43 @@
             // mysqli_select_db($link, $db_name) or die ("Невозможно открыть $db_name");
             
             //создание SQL-запроса для добавления инфы в БД
-
-            //разобраться
-            // $insert  = "INSERT INTO `users_bagrova` (`login`, `email`, `password`)
-            // VALUES ('" .$login."', '".$email."', '".$password."')";
-
-            $result = mysqli_query ($link, $$insert);
-            if ($result) 
+            $insertRegInfo = mysqli_query($link, "INSERT INTO `users_bagrova` (`login`, `email`, `password`)
+            VALUES ('" .$login."', '".$email."', '".$password."')");
+            $selectRegInfo = mysqli_query($link, "SELECT * FROM `users_bagrova` WHERE `id`=".mysqli_insert_id($link));
+            $row = mysqli_fetch_assoc($selectRegInfo);
+                
+            //данные записываются в бд,  но не выводятся в форму
+            if ($insertRegInfo) 
             {
-                echo "<h4>Ваша инфа добавлена в базу данных.</h4>";
-                echo "Ваше имя: $name <br>";
-                echo "Ваша фамилия: $lastName <br>";
-                echo "Ваш E-mail: $email <br>";
-                echo "В поле комментария было: $comment <br>";
+                echo '
+                <!DOCTYPE html>
+                <html lang="ru">
+                    <head>
+                        <link rel="stylesheet" type="text/css" href="super.css"/>
+                        <meta charset = "utf8" />
+                        <script type="text/javascript" src="jquery-3.5.1.js"></script>
+                        <title>ЛР №5-8</title>
+                    </head>
+                    <body>
+                        <form class="decor" method="post" action="main.php" id="registration">
+                            <div class="form-left-decoration"></div>
+                            <div class="form-right-decoration"></div>
+                            <div class="circle"></div>
+                            <div class="form-inner">
+                                <h3>Данные регистрации</h3>
+                                <p style="color: black;">Ваша инфа добавлена в базу данных.</p><br>
+                                
+                                <p>Ваш логин: '.$row['login'].'<br></p>
+                                <p>Ваша пароль: '.$row['password'].'<br></p>
+                                <p>Ваш E-mail: '.$row['email'].'<br></p>
+                            </div>
+                        </form>
+                    </body>
+                </html> ';
+                
+                //закрытие соединения с БД
+                mysqli_close($link);
             }
-    
-            //закрытие соединения с БД
-            mysqli_close ($link);
         }
         else
         {
