@@ -18,67 +18,47 @@
 				<input type="email" placeholder="E-mail" name="email" id="regEmail" onkeyup="checkParams()" required>
 				<input type="password" placeholder="Пароль" name="password" id="regPassword" onkeyup="checkParams()" required>
 				<input type="password" placeholder="Повторите пароль" name="repeatPassword" id="regRepeatPassword" onkeyup="checkParams()" required>
+				<p style="visibility: hidden;" id="pErrHide"></p>
 				
 				<input type="checkbox" id="chb" onchange="checkParams()"> <!--"document.getElementById('regSubmit').disabled = !this.checked;"-->
 				<label for="chb">Согласен на обработку данных</label>
 				<script>
-					//скрипт для проверки поля на пустоту + нажат ли чекбокс
+					//скрипт для проверки поля на пустоту + нажат ли чекбокс + совпадение пароля (неееееееееееееееееееееееее работает)
 					function checkParams() 
 					{
 						//обращение по id элемента
 						var login = $('#regLogin').val();//val() - функция для получение значения эл-та login в форме регистрации
 						var email = $('#regEmail').val();
+						
 						var password = $('#regPassword').val();
 						var repeatPassword = $('#regRepeatPassword').val();
-
+						
 						var chbAgreement = document.getElementById('chb');
 						var btnRegistration = document.getElementById('regSubmit');
-							//document.getElementById('regSubmit').disabled = !document.getElementById('chb').checked;//отключает кнопку регистрации, если чекбокс не отмечен
-
-						if (password == repeatPassword)
-						{
-							if(login.length != 0 && email.length != 0 && password.length != 0 && repeatPassword.length !=0 &&
-							(btnRegistration.disabled = chbAgreement.checked))
-							{
-								$('#regSubmit').removeAttr('disabled');
-							} 
-							else 
-							{
-								$('#regSubmit').attr('disabled', 'disabled');
-							}
-						}
-						else
-						{
-							$("#regRepeatPassword'").css('border', 'red 1px solid');
-							$('regRepeatPassword').html('Пароли не совпадают');
-						}
-
-
-				
-						/*$(document).ready(function() 
-						{
-							$('#repPass').change(function() 
-							{
-								var pass = $("#pass").val();
-								var pass_rep = $("#repPass").val();
-
-								if (pass != pass_rep) 
-								{
-									$("#repPass").css('border', 'red 1px solid');
-									$('#errorBlock').html('Пароли не совпадают');
-								}
-							});
-						});*/
-					
-
-
+						//document.getElementById('regSubmit').disabled = !document.getElementById('chb').checked;//отключает кнопку регистрации, если чекбокс не отмечен
 						
+						
+						$("#regRepeatPassword").on("keyup", function() 
+						{ // Выполняем скрипт при изменении содержимого 2-го поля
+						if(login.length != 0 && email.length != 0 && password.length != 0 && repeatPassword.length !=0 && 
+						password == repeatPassword && (btnRegistration.disabled = chbAgreement.checked))
+						{
+							$('#regSubmit').removeAttr('disabled');// Разрешаем отправку формы
+							$("errorBlock").html(""); // Скрываем сообщение
+						} 
+						else 
+						{
+							$("errorBlock").html("Пароли не совпадают или не все поля заполены!"); // Выводим сообщение
+							$("#regRepeatPassword").css('border', 'red 2px solid');
+							$('#regSubmit').attr('disabled', 'disabled');// Запрещаем отправку формы
+						}
+						});
 					}
 				</script>
+
+
+				<div id="errorBlock"></div>
 				<input type="submit" value="Зарегистрироваться" id="regSubmit" disabled> 
-
-
-
                 <script>
                     //работает для всех инпутов не то что нужно мне
                     /*[].forEach.call(document.querySelectorAll("input"), function(input)
@@ -97,7 +77,6 @@
                             input.value = input.value.replace(/./gm, "★");
                         };
                     });*/
-                
                 </script>
 			</div>
 		</form>

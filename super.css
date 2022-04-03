@@ -81,15 +81,18 @@ body {
    color: white;
    font-size: 14px;
 }
-
 /*не работает*/
-/*.form-inner input[type=submit]:hover {
+.form-inner input[type="submit"]:hover {
    background: #FFFBAD;
    border-bottom: 4px solid #FFF86B;
    color: black;
+   cursor: pointer;
+}
+/*не работает*/
+/*.form-inner input[disabled] {
+   opacity: .6;
+   cursor: not-allowed;
 }*/
-
-
 .form-inner textarea {
    resize: none;
 }

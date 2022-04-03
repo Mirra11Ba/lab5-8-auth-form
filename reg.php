@@ -1,10 +1,5 @@
 <?php
     require('db.php');
-
-    // $db_user = 'root';
-    // $db_password = 'root';
-    // $db_name = '3_bagrova';
-
     
     if (!isset($_POST['login']) || !isset($_POST['email']) || 
     !isset($_POST['password']) || !isset($_POST['repeatPassword']))
@@ -15,28 +10,49 @@
     {
         if (isset($_POST['password']) == isset($_POST['repeatPassword']))
         {
-            //получение значения из формы методом POST и конвертация значения в тип string
+            //получение значения из формы методом POST и конвертация значения в тип string с помощью addslashes
             //с присвоением значения переменной для каждого поля input
             $login = addslashes($_POST['login']);
             $email = addslashes($_POST['email']);
+            //md5 для хэширования пароля через
             $password = addslashes($_POST['password']);
-    
-            //подключения к серверу базы данных в PHP 
-            // $link = new mysqli('localhost', $db_user, $db_password, $db_name);
-            // if ($link->connect_error) 
-            // {
-            //     die('Connect Error (' . $link->connect_errno . ') ' . $link->connect_error);
-            // }
-            // //подключение к выбранной БД
-            // mysqli_select_db($link, $db_name) or die ("Невозможно открыть $db_name");
+            //не работает при md5
+            // $password = md5($_POST['password']);
             
+            //проверка на наличие пароля и email в БД
+            function userExistInDatabase($email, $password)
+            {
+                require('db.php');
+
+                $result = mysqli_query($link,"SELECT id FROM users_bagrova WHERE email = '" . $email . "'");
+                if (mysqli_num_rows($result) > 0) 
+                {
+                    echo 'Email занят';
+                } 
+                else 
+                {
+                    echo 'Email свободен';
+                }
+
+
+
+
+
+                // $sql = "SELECT id FROM users_bagrova WHERE login = $login AND password = " . $password;
+                // if (!$result = $mysqli->query($sql)) {
+                //     echo 'error:' . __METHOD__ . " : " . __LINE__; die;
+                // }
+                // if ($result->num_rows === 1) {
+                //     return true;
+                // }
+            }
+            //if(! userExistInDatabase) если не выполеняется скрипт
             //создание SQL-запроса для добавления инфы в БД
             $insertRegInfo = mysqli_query($link, "INSERT INTO `users_bagrova` (`login`, `email`, `password`)
             VALUES ('" .$login."', '".$email."', '".$password."')");
             $selectRegInfo = mysqli_query($link, "SELECT * FROM `users_bagrova` WHERE `id`=".mysqli_insert_id($link));
             $row = mysqli_fetch_assoc($selectRegInfo);
                 
-            //данные записываются в бд,  но не выводятся в форму
             if ($insertRegInfo) 
             {
                 echo '
@@ -68,10 +84,14 @@
                 //закрытие соединения с БД
                 mysqli_close($link);
             }
+            else
+            {
+                print("Произошла ошибка при выполнении запроса");
+            }
         }
         else
         {
-            echo "<p>Введите пароль повторно<p>";
+            echo "<p>пароли не совпадают<p>";
         }
     }
 ?>
