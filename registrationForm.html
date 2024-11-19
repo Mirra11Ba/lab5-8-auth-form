@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <link rel="stylesheet" type="text/css" href="super.css"/> <!-- подключаем css -->
+        <meta charset = "utf8" />
+		<link rel="shortcut icon" href="img/key.png" type="image/png">
+        <script type="text/javascript" src="jquery-3.5.1.js"></script> <!-- подключаем jquery -->
+        <title>ЛР №5-8</title>
+    </head>
+    <body>
+        <!--Регистрация-->
+		<form class="decor" method="post" action="reg.php" id="registration">
+			<div class="form-left-decoration"></div>
+			<div class="form-right-decoration"></div>
+			<div class="circle"></div>
+			<div class="form-inner">
+				<h3>Регистрация</h3>
+				<input type="text" placeholder="Логин" name="login" id="regLogin" required>
+				<input type="email" placeholder="E-mail" name="email" id="regEmail" required>
+				<input type="password" placeholder="Пароль" name="password" id="regPassword"  required>
+				<input type="password" placeholder="Повторите пароль" name="repeatPassword" id="regRepeatPassword"  required>
+				
+				<input type="checkbox" id="chb" onchange="checkParams()">
+				<label for="chb">Согласен на обработку данных</label>
+				                                                                                                                                                                                                                                                                                                                                                                                                               
+				<input type="submit" value="Зарегистрироваться" id="regSubmit" disabled="disabled">
+				
+			</div>
+		</form>
+		<script>
+			//скрипт для проверки поля на пустоту + нажат ли чекбокс + совпадение пароля
+			function checkParams() 
+			{
+				//обращение по id элемента
+				var login = $('#regLogin').val();//val() - функция для получения значения эл-та login в форме регистрации
+				var email = $('#regEmail').val();
+				var password = $('#regPassword').val();
+				var repeatPassword = $('#regRepeatPassword').val();
+			
+				var chbAgreement = document.getElementById('chb');
+				
+				
+				if (login.length != 0 && email.length != 0 && password.length != 0 && repeatPassword.length !=0 && 
+					password == repeatPassword && chbAgreement.checked == true)
+				{
+					$('#regSubmit').removeAttr('disabled');// разрешить отправку формы
+					$("#regRepeatPassword").css('border', 'black 0px solid');//перекрасить поле для повтора пароля 
+				} 
+				else 
+				{
+					$('#regSubmit').attr('disabled', 'disabled');// Запрещаем отправку формы
+					$("#regRepeatPassword").css('border', 'red 2px solid');//перекрасить поле для повтора пароля в красный
+				}
+			
+			}
+		</script>
+    </body>
+</html>
